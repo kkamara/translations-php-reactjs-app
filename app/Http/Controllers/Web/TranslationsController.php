@@ -6,9 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Requests\CreateTranslations;
+use Illuminate\Support\Facades\App;
 
 class TranslationsController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth:sanctum')
+            ->only(['get']);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -21,6 +27,7 @@ class TranslationsController extends Controller
         }
 
         $request->session()->put("lang", $request->input("lang"));
+        App::setLocale($request->input("lang"));
 
         return response()->json([
             'message' => 'Success',
@@ -32,6 +39,8 @@ class TranslationsController extends Controller
      */
     public function get(Request $request)
     {
-        //
+        // $lang = $request->session()->get("lang");
+        $locale = App::currentLocale();
+        dd($locale);
     }
 }
