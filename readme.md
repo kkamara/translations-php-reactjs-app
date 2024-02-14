@@ -1,4 +1,4 @@
-<img src="https://github.com/kkamara/useful/blob/main/php-reactjs-boilerplate.png?raw=true" alt="php-reactjs-boilerplate.png" width=""/>
+<img src="https://github.com/kkamara/useful/blob/main/translations-php-reactjs-app.png?raw=true" alt="translations-php-reactjs-app.png" width=""/>
 
 <img src="https://github.com/kkamara/useful/blob/main/php-reactjs-boilerplate2.png?raw=true" alt="php-reactjs-boilerplate2.png" width=""/>
 
