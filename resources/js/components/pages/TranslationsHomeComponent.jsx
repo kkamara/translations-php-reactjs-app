@@ -1,18 +1,19 @@
-import React, { useEffect, } from 'react'
+import React, { useEffect, useState, } from 'react'
 import { useNavigate, } from 'react-router-dom'
 import { useDispatch, useSelector, } from 'react-redux'
-import ReactPaginate from 'react-paginate'
-import { getUsers, } from '../../redux/actions/usersActions'
 import { authorize } from '../../redux/actions/authActions'
 
 import "./TranslationsHomeComponent.scss"
 
 export default function TranslationsHomeComponent() {
+  const [lang, setLang] = useState("");
+
   const navigate = useNavigate()
 
   const dispatch = useDispatch()
   const state = useSelector(state => ({
     auth: state.auth,
+    translation: state.translation,
   }))
 
   useEffect(() => {
@@ -28,7 +29,11 @@ export default function TranslationsHomeComponent() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
-    console.log('form submitted.')
+    console.log('form submitted.', lang)
+  }
+
+  const handleLangChange = (e) => {
+    setLang(e.target.value)
   }
 
   if (!state.auth.loading && typeof state.auth.data === 'object' && null !== state.auth.data) {
@@ -46,7 +51,13 @@ export default function TranslationsHomeComponent() {
         <form onSubmit={handleFormSubmit} className='col-md-4 offset-md-4'>
           <div className="col-12">
             <div className="input-group">
-              <select name="lang" id="lang" className='form-control'>
+              <select 
+                name="lang" 
+                id="lang" 
+                className='form-control'
+                value={lang}
+                onChange={handleLangChange}
+              >
                 <option value="" selected>Please choose a language.</option>
                 <option value="en">English</option>
                 <option value="es">Español</option>
