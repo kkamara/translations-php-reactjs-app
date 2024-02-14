@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Web\TranslationsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Web\UserController as WebUserController;
@@ -25,6 +26,14 @@ Route::prefix('web')
             Route::get('/authorize', [WebUserController::class,'authorizeUser']);
         });
         Route::get('/users', [WebUserController::class,'getUsers']);
+        Route::post(
+            "/translation", 
+            [TranslationsController::class, "create"]
+        )->name("translation.create");
+        Route::get(
+            "/translation", 
+            [TranslationsController::class, "get"]
+        )->name("translation.get");
     });
 
 Route::prefix('/user')->group(function () {
