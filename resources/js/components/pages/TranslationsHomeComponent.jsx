@@ -26,6 +26,11 @@ export default function TranslationsHomeComponent() {
     }
   }, [state.auth,])
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault()
+    console.log('form submitted.')
+  }
+
   if (!state.auth.loading && typeof state.auth.data === 'object' && null !== state.auth.data) {
     console.log('authenticated', state.auth.data)
   }
@@ -38,9 +43,18 @@ export default function TranslationsHomeComponent() {
       <div className='container'>
         <br />
         <br />
-        <button className='btn btn-primary'>
-          Test button
-        </button>
+        <form onSubmit={handleFormSubmit} className='col-md-4 offset-md-4'>
+          <div className="col-12">
+            <div className="input-group">
+              <select name="lang" id="lang" className='form-control'>
+                <option value="" selected>Please choose a language.</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+              </select>
+              <input type="submit" className='btn btn-success' value='Go' />
+            </div>
+          </div>
+        </form>
       </div>
     </>
   )
