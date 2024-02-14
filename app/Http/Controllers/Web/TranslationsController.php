@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Requests\CreateTranslations;
 use App\Http\Requests\GetTranslations;
+use Illuminate\Support\Facades\App;
 
 class TranslationsController extends Controller
 {
@@ -36,7 +37,18 @@ class TranslationsController extends Controller
      */
     public function get(GetTranslations $request)
     {
+        if (!$request->validated()) {
+            return response()->json([
+                'message' => 'Valid languages are en, es.',
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
         $locale = $request->input("lang");
-        dd($locale);
+
+        App::setLocale($locale);
+
+        return response()->json([
+            "message" => __("general.welcome"),
+        ]);
     }
 }
