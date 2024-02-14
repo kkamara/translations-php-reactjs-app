@@ -42,6 +42,9 @@ export default function Header(props) {
           <li className="nav-item">
             <a className="nav-link active" aria-current="page" href="/">Home</a>
           </li>
+          <li className="nav-item">
+            <a className="nav-link active" aria-current="page" href="/translations">Translations Home</a>
+          </li>
         </ul>
         <ul className="navbar-nav">
           <li className="nav-item dropdown">

@@ -8,6 +8,7 @@ import Home from "./components/pages/HomeComponent"
 import Login from "./components/pages/auth/LoginComponent"
 import Logout from "./components/pages/auth/LogoutComponent"
 import Register from "./components/pages/auth/RegisterComponent"
+import TranslationsHome from "./components/pages/TranslationsHomeComponent"
 
 import { url } from './utils/config'
 
@@ -17,6 +18,7 @@ export default () => {
       <Header/>
       <Routes>
         <Route path={url("/")} element={<Home />}/>
+        <Route path={url("/translations")} element={<TranslationsHome />}/>
         <Route path={url("/user/login")} element={<Login />}/>
         <Route path={url("/user/logout")} element={<Logout />}/>
         <Route path={url("/user/register")} element={<Register />}/>
