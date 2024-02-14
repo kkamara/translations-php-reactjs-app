@@ -2,6 +2,17 @@
 import HttpService from '../../services/HttpService'
 import { translation, } from '../types'
 
+export const clearTranslation = (lang) => {
+  return async dispatch => {        
+    dispatch({ type: translation.CLEAR_TRANSLATION_PENDING, })
+
+    dispatch({
+      type: translation.CLEAR_TRANSLATION_SUCCESS,
+      payload: null,
+    })
+  }
+}
+
 export const getTranslation = (lang) => {
   return async dispatch => {
     const http = new HttpService()
@@ -14,7 +25,7 @@ export const getTranslation = (lang) => {
         http.getData('translation?lang='+lang, tokenId).then(res => {
           resolve(dispatch({
             type: translation.GET_TRANSLATION_SUCCESS,
-            payload: res.data.data,
+            payload: res.data,
           }))                
         }, error => {
           reject(dispatch({ 
@@ -44,7 +55,7 @@ export const createTranslation = (lang) => {
         http.postData('translation', { lang, }, tokenId).then(res => {
           resolve(dispatch({
             type: translation.CREATE_TRANSLATION_SUCCESS,
-            payload: res.data.data,
+            payload: res.data,
           }))                
         }, error => {
           reject(dispatch({ 

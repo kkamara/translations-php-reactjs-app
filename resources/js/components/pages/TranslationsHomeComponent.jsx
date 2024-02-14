@@ -2,7 +2,11 @@ import React, { useEffect, useState, } from 'react'
 import { useNavigate, } from 'react-router-dom'
 import { useDispatch, useSelector, } from 'react-redux'
 import { authorize, } from '../../redux/actions/authActions'
-import { getTranslation, createTranslation, } from '../../redux/actions/translationActions'
+import {
+  getTranslation,
+  createTranslation,
+  clearTranslation,
+} from '../../redux/actions/translationActions'
 
 import "./TranslationsHomeComponent.scss"
 
@@ -32,6 +36,7 @@ export default function TranslationsHomeComponent() {
     e.preventDefault()
     console.log('form submitted.', lang)
     if (lang === '') {
+      dispatch(clearTranslation())
       return
     }
     dispatch(createTranslation(lang))
@@ -40,6 +45,14 @@ export default function TranslationsHomeComponent() {
 
   const handleLangChange = (e) => {
     setLang(e.target.value)
+  }
+
+  const renderTranslation = () => {
+    if (!state.translation.data) {
+      return null
+    }
+
+    return <h3>{state.translation.data.message}</h3>
   }
 
   if (!state.auth.loading && typeof state.auth.data === 'object' && null !== state.auth.data) {
@@ -72,6 +85,7 @@ export default function TranslationsHomeComponent() {
             </div>
           </div>
         </form>
+        {renderTranslation()}
       </div>
     </>
   )
